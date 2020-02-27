@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/QueueLib" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/QueueLib" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://nyitdevws001:9000/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Job">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AppSettings" nillable="true" type="tns:ArrayOfPropertyOfSettingsKeysstringJvEHjvhM" />
+      <xs:element minOccurs="0" name="Investigator" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JobFileContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JobID" type="ser:guid" />
+      <xs:element minOccurs="0" name="JobType" type="tns:ProcessTypes" />
+      <xs:element minOccurs="0" name="Priority" type="tns:JobPriority" />
+      <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProjectPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestingHost" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sent" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SettingsFileContent" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Job" nillable="true" type="tns:Job" />
+  <xs:complexType name="ArrayOfPropertyOfSettingsKeysstringJvEHjvhM">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PropertyOfSettingsKeysstringJvEHjvhM" type="tns:PropertyOfSettingsKeysstringJvEHjvhM" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPropertyOfSettingsKeysstringJvEHjvhM" nillable="true" type="tns:ArrayOfPropertyOfSettingsKeysstringJvEHjvhM" />
+  <xs:complexType name="PropertyOfSettingsKeysstringJvEHjvhM">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="PropertyOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/QueueLib" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="SettingsKeys" Namespace="http://schemas.datacontract.org/2004/07/QueueLib" />
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" type="tns:SettingsKeys" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PropertyOfSettingsKeysstringJvEHjvhM" nillable="true" type="tns:PropertyOfSettingsKeysstringJvEHjvhM" />
+  <xs:simpleType name="SettingsKeys">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SETTINGS_SETTINGS_PATH" />
+      <xs:enumeration value="SETTINGS_TEMP_DIR" />
+      <xs:enumeration value="NUIX_SDK_PATH" />
+      <xs:enumeration value="SETTINGS_LICENCESERVER" />
+      <xs:enumeration value="SETTINGS_ARX_LICENCESERVER" />
+      <xs:enumeration value="SETTINGS_PRODUCTION_LICENCESERVER" />
+      <xs:enumeration value="BATCH_JAVA_XMS" />
+      <xs:enumeration value="BATCH_JAVA_XMX" />
+      <xs:enumeration value="BATCH_JAVA_LOGLEVEL" />
+      <xs:enumeration value="SETTINGS_NUIX_PATH" />
+      <xs:enumeration value="BATCH_JAVA_OTHER_OPTIONS" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SettingsKeys" nillable="true" type="tns:SettingsKeys" />
+  <xs:simpleType name="ProcessTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ingest" />
+      <xs:enumeration value="Classify" />
+      <xs:enumeration value="Export" />
+      <xs:enumeration value="OCR" />
+      <xs:enumeration value="QC" />
+      <xs:enumeration value="TAG" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProcessTypes" nillable="true" type="tns:ProcessTypes" />
+  <xs:simpleType name="JobPriority">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Highest">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VeryHigh">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="High">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AboveNormal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NORMAL">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Low">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VeryLow">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Lowest">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="JobPriority" nillable="true" type="tns:JobPriority" />
+  <xs:complexType name="Worker">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Hostname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegistrationID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Sent" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Worker" nillable="true" type="tns:Worker" />
+</xs:schema>

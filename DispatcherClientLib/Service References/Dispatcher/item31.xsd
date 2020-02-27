@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://nuix-x/services/" elementFormDefault="qualified" targetNamespace="http://nuix-x/services/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://nyitdevws001:9000/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/QueueLib" />
+  <xs:element name="RegisterJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/QueueLib" minOccurs="0" name="job" nillable="true" type="q1:Job" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterWorker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/QueueLib" minOccurs="0" name="worker" nillable="true" type="q2:Worker" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/QueueLib" minOccurs="0" name="worker" nillable="true" type="q3:Worker" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeRegisterWorker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/QueueLib" minOccurs="0" name="worker" nillable="true" type="q4:Worker" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
