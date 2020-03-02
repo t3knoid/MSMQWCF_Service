@@ -65,7 +65,7 @@ namespace DispatcherClientLib
         /// <param name="hostname">The hostname to be de-registered</param>
         /// <param name="guid">The guid that identifies a specific registration</param>
         /// <returns>Sets Success to true if the operation is successful. Otherwise, Success is set to false and sets message with the exception message.</returns>
-        public DispatcherResult DeregisterProcessor(string hostname, Guid guid)
+        public DispatcherResult DeregisterWorker(string hostname, Guid guid)
         {
             Worker worker = new Worker()
             {

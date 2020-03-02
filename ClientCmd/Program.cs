@@ -29,7 +29,7 @@ namespace DispatcherClientCmd
             }
             else
             {
-                Console.WriteLine("usage: DispatcherClient.exe operation=[registerprocessor | deregisterprocessor | registerjob | requestjob] [dispatcher=hostname]");
+                Console.WriteLine("usage: DispatcherClient.exe operation=[registerworker | deregisterworker | registerjob | requestjob] [dispatcher=hostname]");
                 Environment.Exit(1);
             }
 
@@ -38,7 +38,7 @@ namespace DispatcherClientCmd
                 dispatcher = CommandLineArgsParser.GetArgumentValue(args, "dispatcher");
             }
 
-            List<string> operations = new List<string>() { "registerprocessor", "deregisterprocessor", "registerjob", "requestjob" };
+            List<string> operations = new List<string>() { "registerworker", "deregisterworker", "registerjob", "requestjob" };
             if (operations.Exists(op => op.Equals(operation)))
             {
 #region operations
@@ -46,38 +46,38 @@ namespace DispatcherClientCmd
                 {
                     case "registerprocessor":
                         {
-                            // Send Processor Registration
-                            Console.WriteLine("Registering processor.");
+                            // Send Worker Registration
+                            Console.WriteLine("Registering worker.");
                             DispatcherClient client = new DispatcherClient(dispatcher);
                             string thisHost = System.Net.Dns.GetHostName();
-                            Processor processor = new Processor()
+                            Worker worker = new Worker()
                             {
                                 Hostname = thisHost,
                                 Sent = DateTime.Now,
                             };
 
-                            DispatcherResult result = client.RegisterProcessor(processor);
+                            DispatcherResult result = client.RegisterWorker(worker);
                             if (result.Success)
                             {
-                                Console.WriteLine("Successfully registered processor. Assigned ID of " + result.Message);
+                                Console.WriteLine("Successfully registered worker. Assigned ID of " + result.Message);
                             }
                             else
                             {
-                                Console.WriteLine("Failed to register processor. " + result.Message);
+                                Console.WriteLine("Failed to register worker. " + result.Message);
                             }
                             break;
                         }
                     case "deregisterprocessor":
                         {
                             // Send Processor De-Registration
-                            Console.WriteLine("De-registering processor.");
+                            Console.WriteLine("De-registering worker.");
                             DispatcherClient client = new DispatcherClient(dispatcher);
                             string thisHost = System.Net.Dns.GetHostName();
                             Guid guid = Guid.NewGuid();
-                            DispatcherResult result = client.DeregisterProcessor(thisHost, guid);
+                            DispatcherResult result = client.DeregisterWorker(thisHost, guid);
                             if (result.Success)
                             {
-                                Console.WriteLine("Successfully de-registered processor.");
+                                Console.WriteLine("Successfully de-registered worker.");
                             }
                             else
                             {
@@ -126,19 +126,19 @@ namespace DispatcherClientCmd
                     case "requestjob":
                         {
                             // Send Processor De-Registration
-                            Console.WriteLine("Registering processor.");
+                            Console.WriteLine("Registering worker.");
                             string thisHost = System.Net.Dns.GetHostName();
                             Guid guid = Guid.NewGuid();  // This is just for testing. Ordinarily, the guid from a prior processor registration is used.
 
                             DispatcherClient client = new DispatcherClient(dispatcher);
 
-                            Processor processor = new Processor()
+                            Worker worker = new Worker()
                             {
                                 Hostname = thisHost,
                                 Sent = DateTime.Now,
                             };
 
-                            DispatcherResult result = client.RequestJob(processor);
+                            DispatcherResult result = client.RequestJob(worker);
                             if (result.Success)
                             {
                                 Console.WriteLine("Successfully requested a job from the dispatcher.");
